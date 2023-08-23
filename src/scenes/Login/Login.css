@@ -1,0 +1,45 @@
+.main-page {
+    display: flex;
+    background-color: #2148C0;
+    width: 100%;
+    height:100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    min-width: 200px;
+    max-width: 400px;
+    height: 398px;
+}
+
+.logo-svg-container {
+    display: flex;
+    height: 40%;
+    width: 100%;
+    justify-content: center;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+}
+
+.inputs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 50%;
+    gap: 11px;
+}
+

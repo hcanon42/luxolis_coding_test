@@ -1,0 +1,30 @@
+{
+    "resources": {
+        "en": {
+            "translation": {
+                "login": {
+                    "errors": {
+                        "incorrectPassword": "the provided password is wrong",
+                        "wrongCombination": "Wrong combination"
+                    },
+                    "usernamePlaceholder": "USERNAME",
+                    "passwordPlaceholder": "PASSWORD",
+                    "loginButton": "LOGIN",
+                    "forgotPasswordButton": "Forgot password?"
+                },
+                "notFound": {
+                    "errorMessage": "404 Page not found"
+                },
+                "home": {
+                    "connectionMessage": "You are connected."
+                }
+            }
+        }
+    },
+    "lng": "en",
+    "fallbackLng": "en",
+
+    "interpolation": {
+        "escapeValue": false
+    }
+}
