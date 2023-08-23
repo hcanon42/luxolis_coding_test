@@ -30,7 +30,7 @@ const Login = () => {
     }
 
     const containsOtherThanLettersNumbersAndSpecialChar = (stringToTest) => {
-        const regex = /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\-=/\\|]*$/;
+        const regex = /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~\-=/\\|]*$/;
 
         return !regex.test(stringToTest);
     }
