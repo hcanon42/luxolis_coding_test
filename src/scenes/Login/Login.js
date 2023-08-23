@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import "./Login.css";
-import { ReactComponent as CartLogo} from './static/cart.svg';
-import { ReactComponent as LockLogo} from './static/lock.svg';
-import { ReactComponent as UserLogo} from './static/user.svg';
+import { ReactComponent as CartLogo} from '../../assets/images/cart.svg';
+import { ReactComponent as LockLogo} from '../../assets/images/lock.svg';
+import { ReactComponent as UserLogo} from '../../assets/images/user.svg';
 import i18n from './../../services/i18n/i18n';
 import dummyUser from './../../local/dummy.json'
 import { useNavigate } from 'react-router-dom';
-import Input from '../../components/Login/Input';
+import Input from '../../components/Login/Input/Input';
 import TertiaryButton from '../../components/Buttons/TertiaryButton';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
-import Modal from '../../components/Login/Modal';
+import Modal from '../../components/Login/Modal/Modal';
 
 const Login = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [isPasswordCorrectlyFormatted, setIsPasswordCorrectlyFormatted] = useState(true)
 
     const closeModal = () => {
         setShowModal(false);
@@ -29,10 +30,16 @@ const Login = () => {
         setPassword(event.target.value);
     }
 
-    const containsOtherThanLettersNumbersAndSpecialChar = (stringToTest) => {
-        const regex = /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~\-=/\\|]*$/;
+    const resetPasswordFormatError = () => {
+        setIsPasswordCorrectlyFormatted(true);
+    }
 
-        return !regex.test(stringToTest);
+    const checkRegexPassword = () => {
+        const hasLetter = /[a-zA-Z]/.test(password);
+        const hasNumber = /^(?=.*\d)/.test(password);
+        const hasSpecialChar = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/.test(password);
+
+        setIsPasswordCorrectlyFormatted(hasLetter && hasNumber && hasSpecialChar);
     }
     
     const handleLoginClick = () => {
@@ -58,24 +65,27 @@ const Login = () => {
                         <Input
                             logo={<UserLogo />}
                             value={username}
-                            onClickHandle={handleChangeUsername}
+                            onChangeHandle={handleChangeUsername}
                             type="text"
                             placeholder={i18n.t("login.usernamePlaceholder")}
+                            isFieldCorrect={true}
                         />
                         <Input
                             logo={<LockLogo />}
                             value={password}
-                            onClickHandle={handleChangePassword}
+                            onChangeHandle={handleChangePassword}
                             type="password"
                             placeholder={i18n.t("login.passwordPlaceholder")}
-                            showErrorMessage={containsOtherThanLettersNumbersAndSpecialChar(password)}
+                            onBlur={checkRegexPassword}
+                            onFocus={resetPasswordFormatError}
+                            isFieldCorrect={isPasswordCorrectlyFormatted}
                         />
                     </div>
                     <div className='login-buttons-container'>
                         <PrimaryButton
                             label={i18n.t("login.loginButton")}
                             onClickHandle={handleLoginClick}
-                            disabled={containsOtherThanLettersNumbersAndSpecialChar(password)}
+                            disabled={!isPasswordCorrectlyFormatted}
                         />
                         <TertiaryButton
                             label={i18n.t("login.forgotPasswordButton")}
